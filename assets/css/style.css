@@ -7,6 +7,27 @@
  */
 
 
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo img {
+  margin-right: 10px;
+}
+.logo span {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--dark-jungle-green);
+  font-family: var(--ff-poppins);
+}
+
+#last span {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  font-family: var(--ff-poppins);
+}
 
 
 
