@@ -312,7 +312,7 @@ button, a { transition: var(--transition); }
   align-items: center;
 }
 
-.header-top .container { gap: 8px 20px; }
+.header-top .container { gap: 8px 20px; margin-bottom : 20px; }
 
 .header-top-list { gap: 15px; }
 
