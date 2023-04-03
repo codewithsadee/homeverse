@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <link rel="stylesheet" href="./style.css"> -->
+	<title>AgentLogin</title>
+</head>
+
+<body>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f4;
+		}
+
+		form {
+			background-color: #fff;
+			max-width: 400px;
+			margin: 0 auto;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		}
+
+		h2 {
+			text-align: center;
+			margin-bottom: 20px;
+			color: #333;
+		}
+
+		input[type="text"],
+		input[type="password"],
+		select {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+			color: #333;
+		}
+
+		input[type="submit"] {
+			background-color: #333;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #555;
+		}
+	</style>
+	<form action="" method="post">
+		<h2>Agent Login</h2>
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" placeholder="Enter your username">
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" placeholder="Enter your password">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" placeholder="Enter your name">
+		<label for="phone">Phone Number:</label>
+		<input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+		<label for="email">Email:</label>
+		<input type="text" id="email" name="email" placeholder="Enter your email address">
+		<label for="address">Address:</label>
+		<input type="text" id="address" name="address" placeholder="Enter your address">
+		<label for="city">City:</label>
+		<select id="city" name="city">
+			<option value="">Select your city</option>
+			<option value="mumbai">Mumbai</option>
+			<option value="delhi">Delhi</option>
+			<option value="bangalore">Bangalore</option>
+			<option value="chennai">Chennai</option>
+			<option value="hyderabad">Hyderabad</option>
+		</select>
+		<input type="submit" value="Submit">
+	</form>
+</body>
+
+</html>
