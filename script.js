@@ -32,11 +32,14 @@ app.get('/buy' , (req , res) => {
   res.sendFile(__dirname + '/public/buy.html')
 });
 
+app.get('/rent' , (req , res) => {
+  res.sendFile(__dirname  + '/public/rent.html');
+});
+
 app.post('/buy', (req, res) => {
   let city = req.body.city;
   let state = req.body.state;
   let zip = req.body.zip;
-  console.log(city);
 
   // con.connect((err) => {
   //   if (err) throw err;
@@ -53,8 +56,21 @@ app.post('/buy', (req, res) => {
       });
     // })
 });
-// finalProps.push(37);
-// finalProps.push(24);
+
+app.post('/rent' , (req ,res) => {
+  let address = req.body.address;
+  let bedRooms = req.body.bedrooms;
+  let bathrooms = req.body.bathrooms;
+  let city = req.body.city;
+  let state = req.body.state;
+  let zipCode = req.body.zipCode;
+  let price  = req.body.price;
+
+
+
+  con.query("INSERT INTO property")
+});
+
 
 app.get('/property', (req, res) => {
   // con.connect((err) => {
@@ -66,12 +82,12 @@ app.get('/property', (req, res) => {
                       property.state,
                       property.p_area,
                       property.price,
-                      property.address_line_1,
-                      property.address_line_2,
-                      property.address_line_3,
+                      property.bedrooms ,
+                      property.bathrooms ,
+                      property.address,
                       property.zipcode
                   FROM property
-                  JOIN Agent ON property.agent_assigned = Agent.a_id;`
+                  JOIN Agent ON property.assigned_agent = Agent.a_id;`
 
 
 
@@ -86,10 +102,10 @@ app.get('/property', (req, res) => {
             state: element.state,
             area: element.p_area,
             price : element.price ,
-            address_line1: element.address_line_1,
-            address_line2: element.address_line_2,
-            address_line3: element.address_line_3,
-            zipCode: element.zipcode
+            address : element.address,
+            zipCode: element.zipcode ,
+            bedrooms : element.bedrooms ,
+            bathrooms: element.bathrooms ,
           };
           final.push(obj);
         }

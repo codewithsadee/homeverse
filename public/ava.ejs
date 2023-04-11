@@ -13,6 +13,7 @@
 		html {
 			font-family: var(--ff-nunito-sans);
 			scroll-behavior: smooth;
+            font-family: var(--ff-poppins);
 		}
 
         body {
@@ -63,9 +64,9 @@
                     <th>City, State</th>
                     <th>Area</th>
                     <th>Price</th>
-                    <th>Address Line 1</th>
-                    <th>Address Line 2</th>
-                    <th>Address Line 3</th>
+                    <th>Address</th>
+                    <th>bedrooms</th>
+                    <th>bathrooms</th>
                     <th>Zip Code</th>
                 </tr>
             </thead>
@@ -84,13 +85,13 @@
                         <td>$<%= apartments[i].price %>
                         </td>
                         <td>
-                            <%= apartments[i].address_line1 %>
+                            <%= apartments[i].address%>
                         </td>
                         <td>
-                            <%= apartments[i].address_line2 %>
+                            <%= apartments[i].bedrooms%>
                         </td>
                         <td>
-                            <%= apartments[i].address_line3 %>
+                            <%= apartments[i].bathrooms%>
                         </td>
                         <td>
                             <%= apartments[i].zipCode %>
