@@ -1,52 +1,114 @@
-'use strict';
-import './connection'
+let con = require('./connection')
+let express = require("express");
+let bodyParser = require('body-parser');
+const { connect } = require('./connection');
+let app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(express.static('./public/'))
+app.set('view engine', 'ejs')
 
-/**
- * element toggle function
- */
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/public/index.html')
+// });
 
-const elemToggleFunc = function (elem) { elem.classList.toggle("active"); }
+// app.post('/' , (req, res) => {
 
-
-
-/**
- * navbar toggle
- */
-
-const navbar = document.querySelector("[data-navbar]");
-const overlay = document.querySelector("[data-overlay]");
-const navCloseBtn = document.querySelector("[data-nav-close-btn]");
-const navOpenBtn = document.querySelector("[data-nav-open-btn]");
-const navbarLinks = document.querySelectorAll("[data-nav-link]");
-
-const navElemArr = [overlay, navCloseBtn, navOpenBtn];
-
-/**
- * close navbar when click on any navbar link
- */
-
-for (let i = 0; i < navbarLinks.length; i++) { navElemArr.push(navbarLinks[i]); }
-
-/**
- * addd event on all elements for toggling navbar
- */
-
-for (let i = 0; i < navElemArr.length; i++) {
-  navElemArr[i].addEventListener("click", function () {
-    elemToggleFunc(navbar);
-    elemToggleFunc(overlay);
-  });
-}
+// });
 
 
+// app.get('/buy' , (req, res ) => {
+//   res.sendFile(__dirname + '../buy.html')
+// });
+con.connect(function(err) {
+  if (err) throw err
+});
 
-/**
- * header active state
- */
+let finalProps = []
 
-const header = document.querySelector("[data-header]");
+app.get('/buy' , (req , res) => {
+  res.sendFile(__dirname + '/public/buy.html')
+});
 
-window.addEventListener("scroll", function () {
-  window.scrollY >= 400 ? header.classList.add("active")
-    : header.classList.remove("active");
+app.post('/buy', (req, res) => {
+  let city = req.body.city;
+  let state = req.body.state;
+  let zip = req.body.zip;
+  console.log(city);
+
+  // con.connect((err) => {
+  //   if (err) throw err;
+
+    con.query("SELECT * FROM property", (err, result, fields) => {
+      if (err) throw err;
+      // console.log(res);
+      result.forEach((property) => {
+        // console.log(property.city , " " , city);
+        if (property.city === city)
+          finalProps.push(property.p_id)
+        });
+        res.redirect('/property')
+      });
+    // })
+});
+// finalProps.push(37);
+// finalProps.push(24);
+
+app.get('/property', (req, res) => {
+  // con.connect((err) => {
+    // if (err) throw err;
+
+    let sql = `SELECT property.p_id,
+                      Agent.name AS agent_name,
+                      property.city,
+                      property.state,
+                      property.p_area,
+                      property.price,
+                      property.address_line_1,
+                      property.address_line_2,
+                      property.address_line_3,
+                      property.zipcode
+                  FROM property
+                  JOIN Agent ON property.agent_assigned = Agent.a_id;`
+
+
+
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      let final = [];
+      result.forEach((element) => {
+        if (finalProps.includes(element.p_id)) {
+          let obj = {
+            name: element.agent_name,
+            city: element.city,
+            state: element.state,
+            area: element.p_area,
+            price : element.price ,
+            address_line1: element.address_line_1,
+            address_line2: element.address_line_2,
+            address_line3: element.address_line_3,
+            zipCode: element.zipcode
+          };
+          final.push(obj);
+        }
+      });
+      res.render(__dirname + '/public/ava.ejs', {
+        apartments: final
+      })
+    });
+  // });
+});
+
+// if(finalProps.length !== 0) {
+//   res.render(__dirname + '/public/ava.ejs' , {property : finalProps})
+// } else {
+//   res.render(__dirname + './public/notAva.html')
+// }
+
+app.listen(3000, (err) => {
+  if (!err)
+    console.log("Successfully connected to PORT:3000");
+  else console.log(err);
 });

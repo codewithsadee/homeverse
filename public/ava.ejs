@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Apartment Listings</title>
+    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
+    <style>
+        :root {
+			--ff-nunito-sans: "Nunito Sans", sans-serif;
+			--ff-poppins: "Poppins", sans-serif;
+		}
+
+		html {
+			font-family: var(--ff-nunito-sans);
+			scroll-behavior: smooth;
+		}
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FF5A3D;
+            /* change the background color */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #fff;
+            /* change the text color */
+            margin-top: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <% if (apartments.length> 0) { %>
+        <h1>Apartment Listings</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent Name</th>
+                    <th>City, State</th>
+                    <th>Area</th>
+                    <th>Price</th>
+                    <th>Address Line 1</th>
+                    <th>Address Line 2</th>
+                    <th>Address Line 3</th>
+                    <th>Zip Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i=0; i < apartments.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= apartments[i].name %>
+                        </td>
+                        <td>
+                            <%= apartments[i].city %>, <%= apartments[i].state %>
+                        </td>
+                        <td>
+                            <%= apartments[i].area %>
+                        </td>
+                        <td>$<%= apartments[i].price %>
+                        </td>
+                        <td>
+                            <%= apartments[i].address_line1 %>
+                        </td>
+                        <td>
+                            <%= apartments[i].address_line2 %>
+                        </td>
+                        <td>
+                            <%= apartments[i].address_line3 %>
+                        </td>
+                        <td>
+                            <%= apartments[i].zipCode %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <h1>Sorry, we have no apartments available at this location</h1>
+            <% } %>
+</body>
+
+</html>

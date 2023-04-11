@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Enter Your Location</title>
-    <link rel="shortcut icon" href="favicon.png" type="image/svg+xml">
+	<link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
 	<style>
+		:root {
+			--ff-nunito-sans: "Nunito Sans", sans-serif;
+			--ff-poppins: "Poppins", sans-serif;
+		}
+
+		html {
+			font-family: var(--ff-nunito-sans);
+			scroll-behavior: smooth;
+		}
+
 		body {
 			font-family: Arial, sans-serif;
 			background-color: #f4f4f4;
 		}
+
 		.container {
 			max-width: 600px;
 			margin: 0 auto;
 			padding: 20px;
 			background-color: #fff;
-			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 			border-radius: 5px;
 			text-align: center;
 			color: #333;
 		}
+
 		h2 {
 			margin-top: 0;
 			margin-bottom: 20px;
 			color: #FF5A3D;
 			font-size: 36px;
 		}
+
 		form {
 			display: inline-block;
 			text-align: left;
 		}
+
 		label {
 			display: block;
 			font-size: 18px;
 			margin-bottom: 10px;
 			color: #333;
 		}
+
 		input[type="text"] {
 			display: block;
 			width: 100%;
@@ -44,7 +60,8 @@
 			font-size: 16px;
 			color: #333;
 		}
-		input[type="submit"] {
+
+		input[type=submit] {
 			background-color: #FF5A3D;
 			color: #fff;
 			border: none;
@@ -54,23 +71,27 @@
 			cursor: pointer;
 			transition: background-color 0.2s ease-in-out;
 		}
-		input[type="submit"]:hover {
+
+		input[type=submit]:hover {
 			background-color: #FF5A3D;
 		}
 	</style>
 </head>
+
 <body>
 	<div class="container">
 		<h2>Enter Your Location</h2>
-		<form>
+		<form action="" method="post">
 			<label for="city">City:</label>
 			<input type="text" id="city" name="city" placeholder="Enter your city">
 			<label for="state">State:</label>
 			<input type="text" id="state" name="state" placeholder="Enter your state">
 			<label for="zip">Zip Code:</label>
 			<input type="text" id="zip" name="zip" placeholder="Enter your zip code">
+			<!-- <a class="btn" role="button">Submit</a> -->
 			<input type="submit" value="Submit">
 		</form>
 	</div>
 </body>
+
 </html>
