@@ -2,6 +2,7 @@ let con = require('./connection')
 let express = require("express");
 let bodyParser = require('body-parser');
 const { connect } = require('./connection');
+const { resetWatchers } = require('nodemon/lib/monitor/watch');
 let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -10,18 +11,6 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('./public/'))
 app.set('view engine', 'ejs')
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/public/index.html')
-// });
-
-// app.post('/' , (req, res) => {
-
-// });
-
-
-// app.get('/buy' , (req, res ) => {
-//   res.sendFile(__dirname + '../buy.html')
-// });
 con.connect(function(err) {
   if (err) throw err
 });
@@ -36,45 +25,82 @@ app.get('/rent' , (req , res) => {
   res.sendFile(__dirname  + '/public/rent.html');
 });
 
+app.get('/sell' , (req , res) => {
+  res.sendFile(__dirname + '/public/sell.html');
+});
+
+app.post('/sell' , (req ,res) => {
+  let address = req.body.address;
+  let bedRooms = req.body.bedrooms;
+  let bathrooms = req.body.bathrooms;
+  let propertyArea = req.body.propertyArea;
+  let city = req.body.city;
+  let state = req.body.state;
+  let zipCode = req.body.zipCode;
+  let price  = req.body.price;
+  let rent = 0;
+
+   let sql = "INSERT INTO property (p_area , address , bedrooms , bathrooms , city , state , zipcode , price ,on_rent_or_sold) VALUES ?";
+
+  const values = [ [`${propertyArea}` , `${address}` , `${bedRooms}` , `${bathrooms}` , `${city}` , `${state}` , `${zipCode}` , `${price}` , `${rent}`] ]
+
+  con.query(sql , [values] , (err , result) => {
+    if(err) throw err;
+    else {
+      res.redirect('/success');
+    }
+  })
+});
+
+app.get('/success' , (req ,res) => {
+  res.sendFile(__dirname + '/public/successf.html');
+});
+
 app.post('/buy', (req, res) => {
   let city = req.body.city;
   let state = req.body.state;
   let zip = req.body.zip;
-
-  // con.connect((err) => {
-  //   if (err) throw err;
 
     con.query("SELECT * FROM property", (err, result, fields) => {
       if (err) throw err;
       // console.log(res);
       result.forEach((property) => {
         // console.log(property.city , " " , city);
-        if (property.city === city)
+        if (property.city === city && property.state === state)
           finalProps.push(property.p_id)
         });
-        res.redirect('/property')
+        res.redirect('/property');
       });
-    // })
 });
 
 app.post('/rent' , (req ,res) => {
   let address = req.body.address;
   let bedRooms = req.body.bedrooms;
   let bathrooms = req.body.bathrooms;
+  let propertyArea = req.body.propertyArea;
   let city = req.body.city;
   let state = req.body.state;
   let zipCode = req.body.zipCode;
   let price  = req.body.price;
+  let rent = 0;
 
+   let sql = "INSERT INTO property (p_area , address , bedrooms , bathrooms , city , state , zipcode , price ,on_rent_or_sold) VALUES ?";
 
+  const values = [ [`${propertyArea}` , `${address}` , `${bedRooms}` , `${bathrooms}` , `${city}` , `${state}` , `${zipCode}` , `${price}` , `${rent}`] ]
 
-  con.query("INSERT INTO property")
+  con.query(sql , [values] , (err , result) => {
+    if(err) throw err;
+    else {
+      res.redirect('/success');
+    }
+  })
 });
 
+app.get('/success' , (req ,res) => {
+  res.sendFile(__dirname + '/public/successf.html');
+});
 
 app.get('/property', (req, res) => {
-  // con.connect((err) => {
-    // if (err) throw err;
 
     let sql = `SELECT property.p_id,
                       Agent.name AS agent_name,
@@ -116,12 +142,6 @@ app.get('/property', (req, res) => {
     });
   // });
 });
-
-// if(finalProps.length !== 0) {
-//   res.render(__dirname + '/public/ava.ejs' , {property : finalProps})
-// } else {
-//   res.render(__dirname + './public/notAva.html')
-// }
 
 app.listen(3000, (err) => {
   if (!err)
