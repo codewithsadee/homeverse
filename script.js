@@ -1,8 +1,6 @@
 let con = require('./connection')
 let express = require("express");
 let bodyParser = require('body-parser');
-const { connect } = require('./connection');
-const { resetWatchers } = require('nodemon/lib/monitor/watch');
 let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -11,9 +9,9 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('./public/'))
 app.set('view engine', 'ejs')
 
-con.connect(function(err) {
-  if (err) throw err
-});
+  con.connect(function(err) {
+    if (err) throw err
+  });
 
 let finalProps = []
 
@@ -53,6 +51,12 @@ app.post('/sell' , (req ,res) => {
   })
 });
 
+app.get('/slider' , (req ,res) => {
+  let linkClicked = req.query.link;
+  console.log(linkClicked);
+  res.render(__dirname + '/public/slider' , {variable : linkClicked});
+});
+
 app.get('/success' , (req ,res) => {
   res.sendFile(__dirname + '/public/successf.html');
 });
@@ -70,7 +74,7 @@ app.post('/buy', (req, res) => {
         if (property.city === city && property.state === state)
         finalProps.push(property.p_id)
       });
-        res.redirect('/property');
+      res.redirect('/property');
       });
     });
 

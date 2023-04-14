@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f3f3;
+        }
+
+        .slider {
+            position: relative;
+            width: 800px;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .slide:first-child {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <% if(variable === 1) { %>
+            <img src="/public/new_images/Car-Parking/apartment-building-parking-lot-courtyard-2.jpg" class="slide">
+        <img src="/public/new_images/Car-Parking/easeofdoingbusiness11thjuly_1531308459681_163.webp" class="slide">
+        <img src="/public/new_images/Car-Parking/multi-storey-car-park-1271918_1920-1024x768.jpg" class="slide">
+        <img src="/public/new_images/Car-Parking/parking_2.png" class="slide">
+        <img src="/public/new_images/Car-Parking/shutterstock_1102616546.jpg" class="slide">
+      <% } else if(variable === 2) { %>
+        <img src="/public/new_images/Swimming-Pool/29.jpg" class="slide">
+        <img src="/public/new_images/Swimming-Pool/6428b142e088fd3cadc37cf6b7042e57.jpg" class="slide">
+        <img src="/public/new_images/Swimming-Pool/caae4667561b10a07cc060790aacb2e2.jpg" class="slide">
+        <img src="/public/new_images/Swimming-Pool/istockphoto-1047924048-612x612.jpg" class="slide">
+        <img src="/public/new_images/Swimming-Pool/png-transparent-swimming-pool-landscape-design-landscaping-house-design-swimming-pool-villa-patio.png" class="slide">
+      <% } else if(variable === 3) { %>
+        <img src="/public/new_images/Private-Security/1.jpg" class="slide">
+        <img src="/public/new_images/Private-Security/2.jpg" class="slide">
+        <img src="/public/new_images/Private-Security/3.jpg" class="slide">
+        <img src="/public/new_images/Private-Security/4.jpg" class="slide">
+        <img src="/public/new_images/Private-Security/5.jpg" class="slide">
+      <% } else if(variable === 4) { %>
+        <img src="/public/new_images/Medical-Centre/1.jpg" class="slide">
+        <img src="/public/new_images/Medical-Centre/2.jpg" class="slide">
+        <img src="/public/new_images/Medical-Centre/3.jpg" class="slide">
+        <img src="/public/new_images/Medical-Centre/4.jpg" class="slide">
+        <img src="/public/new_images/Medical-Centre/5.jpg" class="slide">
+      <% } else if(variable === 5) { %>
+        <img src="/public/new_images/Library-Area/1.jpg" class="slide">
+        <img src="/public/new_images/Library-Area/2.jpg" class="slide">
+        <img src="/public/new_images/Library-Area/3.jpg" class="slide">
+        <img src="/public/new_images/Library-Area/4.jpg" class="slide">
+        <img src="/public/new_images/Library-Area/5.jpg" class="slide">
+        <% } else if(variable === 6) { %>
+
+            <img src="/public/new_images/King-Size-Beds/1.jpg" class="slide">
+            <img src="/public/new_images/King-Size-Beds/2.jpg" class="slide">
+            <img src="/public/new_images/King-Size-Beds/3.jpg" class="slide">
+            <img src="/public/new_images/King-Size-Beds/4.jpg" class="slide">
+            <img src="/public/new_images/King-Size-Beds/5.jpg" class="slide">
+            <% } else if(variable === 7) { %>
+
+            <img src="/public/new_images/Modern-Apartments/1.jpg" class="slide">
+            <img src="/public/new_images/Modern-Apartments/2.jpg" class="slide">
+            <img src="/public/new_images/Modern-Apartments/3.jpg" class="slide">
+            <img src="/public/new_images/Modern-Apartments/4.jpg" class="slide">
+            <img src="/public/new_images/Modern-Apartments/5.jpg" class="slide">
+            <% } else if(variable === 8) { %>
+
+            <img src="/public/new_images/Kid's-Playground/1.jpg" class="slide">
+            <img src="/public/new_images/Kid's-Playground/2.jpg" class="slide">
+            <img src="/public/new_images/Kid's-Playground/3.jpg" class="slide">
+            <img src="/public/new_images/Kid's-Playground/4.jpg" class="slide">
+            <img src="/public/new_images/Kid's-Playground/5.jpg" class="slide">
+            <% } %>
+        </div>
+            <!-- <script src="slider.js"></script> -->
+</body>
+
+</html>
